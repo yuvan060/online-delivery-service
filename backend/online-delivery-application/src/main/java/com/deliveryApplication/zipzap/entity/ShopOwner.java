@@ -1,5 +1,6 @@
 package com.deliveryApplication.zipzap.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +26,10 @@ public class ShopOwner {
     private Long id;
     private String name;
     private String shopName;
+    
+    @OneToOne
+    private Address address;
+    
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -33,7 +38,7 @@ public class ShopOwner {
     private List<Order> orders;
 
     @OneToMany(mappedBy = "shopOwner")
-    private List<Product> products;
+    private List<Product> products ;
 
 
 }

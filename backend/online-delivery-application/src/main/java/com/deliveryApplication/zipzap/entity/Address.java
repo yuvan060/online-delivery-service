@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,8 +24,4 @@ public class Address {
 	private String doorNo;
     private String street;
     private String locality;
-    
-    @ManyToOne
-    @JoinColumn
-    private Customer customer;
 }

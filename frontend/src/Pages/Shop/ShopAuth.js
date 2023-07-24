@@ -57,34 +57,39 @@ function ShopAuth() {
 
   async function handleRegister(e) {
     e.preventDefault();
-    if (shopOwner.password !== shopOwner.confirmPassword) {
-      notify("Passwords won't match");
-    } else {
-      const data = {
-        name: shopOwner.firstName + " " + shopOwner.lastName,
-        email: shopOwner.email,
-        role: "shop",
-        password: shopOwner.password,
-      };
-      console.log(data);
-      const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/register",
-        data
-      );
-      if (res.data.token === "Email Already exists") {
-        notify("Email already exists");
+
+    try {
+      if (shopOwner.password !== shopOwner.confirmPassword) {
+        notify("Passwords won't match");
       } else {
-        dispatch(
-          login({
-            email: shopOwner.email,
-            password: shopOwner.password,
-            token: res.data.token,
-            role: "shop",
-            loggedIn: true,
-          })
+        const data = {
+          name: shopOwner.firstName + " " + shopOwner.lastName,
+          email: shopOwner.email,
+          role: "shop",
+          password: shopOwner.password,
+        };
+        console.log(data);
+        const res = await axios.post(
+          "http://localhost:8080/api/v1/auth/register",
+          data
         );
-        navigate("/");
+        if (res.data.token === "Email Already exists") {
+          notify("Email already exists");
+        } else {
+          dispatch(
+            login({
+              email: shopOwner.email,
+              password: shopOwner.password,
+              token: res.data.token,
+              role: "shop",
+              loggedIn: true,
+            })
+          );
+          navigate("/");
+        }
       }
+    } catch {
+      notify("Something went wrong");
     }
   }
 

@@ -57,34 +57,38 @@ function DeliveryPartnerAuth() {
 
   async function handleRegister(e) {
     e.preventDefault();
-    if (deliveryPartner.password !== deliveryPartner.confirmPassword) {
-      notify("Passwords won't match");
-    } else {
-      const data = {
-        name: deliveryPartner.firstName + " " + deliveryPartner.lastName,
-        email: deliveryPartner.email,
-        role: "deliveryPartner",
-        password: deliveryPartner.password,
-      };
-      console.log(data);
-      const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/register",
-        data
-      );
-      if (res.data.token === "Email Already exists") {
-        notify("Email already exists");
+    try {
+      if (deliveryPartner.password !== deliveryPartner.confirmPassword) {
+        notify("Passwords won't match");
       } else {
-        dispatch(
-          login({
-            email: deliveryPartner.email,
-            password: deliveryPartner.password,
-            token: res.data.token,
-            role: "deliveryPartner",
-            loggedIn: true,
-          })
+        const data = {
+          name: deliveryPartner.firstName + " " + deliveryPartner.lastName,
+          email: deliveryPartner.email,
+          role: "deliveryPartner",
+          password: deliveryPartner.password,
+        };
+        console.log(data);
+        const res = await axios.post(
+          "http://localhost:8080/api/v1/auth/register",
+          data
         );
-        navigate("/");
+        if (res.data.token === "Email Already exists") {
+          notify("Email already exists");
+        } else {
+          dispatch(
+            login({
+              email: deliveryPartner.email,
+              password: deliveryPartner.password,
+              token: res.data.token,
+              role: "deliveryPartner",
+              loggedIn: true,
+            })
+          );
+          navigate("/");
+        }
       }
+    } catch {
+      notify("Network Error");
     }
   }
 

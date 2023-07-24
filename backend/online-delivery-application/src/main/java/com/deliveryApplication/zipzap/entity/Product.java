@@ -27,7 +27,10 @@ public class Product {
     private String name;
     private double price;
     private String description;
-
+    private double quantity;
+    private String category;
+    private String imgURL;
+    private Long shopId;
     
     @ManyToOne
     @JoinColumn(name = "shop_owner_id")

@@ -28,6 +28,10 @@ function Navbar() {
       : [
           { name: "Your Account", link: "/dashboard/account" },
           { name: "Your Orders", link: "/dashboard/orders" },
+          {
+            name: "Complete Your Profile",
+            link: "/dashboard/complete-profile",
+          },
           { name: "LogOut", link: "/logout" },
         ];
   if (user !== null) {

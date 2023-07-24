@@ -15,6 +15,7 @@ import ProductByCategory from "./Pages/ProductByCategory/ProductByCategory";
 import Orders from "./Pages/Orders/Orders";
 import Account from "./Pages/Customer/Account";
 import AddProduct from "./Pages/Shop/AddProducts";
+import CompleteProfile from "./Pages/CompleteYourProfile/CompleteYourProfile";
 
 function App() {
   const user = useSelector(selectUser);
@@ -45,7 +46,10 @@ function App() {
           <Route path="/dashboard/orders" element={<Orders />} />
           <Route path="/dashboard/account" element={<Account />} />
           <Route path="/dashboard/add-products" element={<AddProduct />} />
-          <Route path="/dashboard/complete-profile" element={<LogOut />} />
+          <Route
+            path="/dashboard/complete-profile"
+            element={<CompleteProfile />}
+          />
           <Route path="/logout" element={<LogOut />} />
           <Route path="*" element={<Error />} />
         </Routes>

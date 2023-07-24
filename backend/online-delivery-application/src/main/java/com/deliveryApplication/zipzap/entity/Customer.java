@@ -26,8 +26,8 @@ public class Customer {
     private Long id;
     private String name;
     
-    @OneToMany(mappedBy = "customer")
-    private List<Address> address;
+    @OneToOne
+    private Address address;
     
     @OneToOne
     @JoinColumn(name = "user_id")

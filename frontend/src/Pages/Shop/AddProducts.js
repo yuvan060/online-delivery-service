@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "../../Components/Navbar";
 import {
   TextField,
@@ -7,12 +8,12 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
-
-function handleSubmit(e) {
-  e.preventDefault();
-}
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
 
 function AddProduct() {
+  const user = useSelector(selectUser);
   const category = [
     { content: "Fruits & Vegetables" },
     { content: "Snacks & Biscuits" },
@@ -34,6 +35,26 @@ function AddProduct() {
     { content: "Beauty & Makeup" },
     { content: "Kitchen & Home" },
   ];
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/shop-owners/create-product/" + user.email,
+        items
+      );
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const [items, setItems] = useState({
+    name: "",
+    imageURL: "",
+    description: "",
+    quantity: "",
+    price: "",
+    category: "",
+  });
   return (
     <>
       <Navbar />
@@ -47,6 +68,13 @@ function AddProduct() {
             <h1>Add Product</h1>
             <div className="field-container">
               <TextField
+                value={items.name}
+                onChange={(e) => {
+                  setItems({
+                    ...items,
+                    name: e.target.value,
+                  });
+                }}
                 fullWidth
                 variant="outlined"
                 required
@@ -62,13 +90,30 @@ function AddProduct() {
                 <InputLabel>Choose Category</InputLabel>
                 <Select label="Choose Category">
                   {category.map((c) => (
-                    <MenuItem value={c.content}>{c.content}</MenuItem>
+                    <MenuItem
+                      value={c.content}
+                      onClick={() => {
+                        setItems({
+                          ...items,
+                          category: c.content,
+                        });
+                      }}
+                    >
+                      {c.content}
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </div>
             <div className="field-container">
               <TextField
+                value={items.description}
+                onChange={(e) => {
+                  setItems({
+                    ...items,
+                    description: e.target.value,
+                  });
+                }}
                 fullWidth
                 multiline
                 required
@@ -79,6 +124,13 @@ function AddProduct() {
             </div>
             <div className="field-container">
               <TextField
+                value={items.price}
+                onChange={(e) => {
+                  setItems({
+                    ...items,
+                    price: e.target.value,
+                  });
+                }}
                 required
                 variant="outlined"
                 label="Price(in Rs.)"
@@ -87,6 +139,13 @@ function AddProduct() {
             </div>
             <div className="field-container">
               <TextField
+                value={items.quantity}
+                onChange={(e) => {
+                  setItems({
+                    ...items,
+                    quantity: e.target.value,
+                  });
+                }}
                 type="number"
                 required
                 variant="outlined"
