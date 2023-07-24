@@ -69,8 +69,8 @@ function Home() {
   const navigate = useNavigate();
   useEffect(() => {
     if (user) {
-      if (user.role === "shop" || user.role === "deliveryPartner") {
-        navigate("/dashboard");
+      if (user.role === "shop") {
+        navigate("/dashboard/shop-owner");
       }
     }
   });

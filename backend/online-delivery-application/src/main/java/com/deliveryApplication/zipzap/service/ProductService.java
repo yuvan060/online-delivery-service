@@ -24,12 +24,30 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 	
-	public Optional<Product> getProductsByCategory(String category){
+	public List<Product> getProductsByCategory(String category){
 		return productRepository.findByCategory(category);
 	}
 	
 	public List<Product> getProductsByShopOwner(String email){
 		return shopOwnerRepository.findByUserEmail(email).getProducts();
+	}
+
+	public String deleteProductById(Long id) {
+		productRepository.deleteById(id);
+		return "Deleted SuccessFully";
+	}
+
+	public String updateProduct(Product product) {
+		Optional<Product> existingProduct = productRepository.findById(product.getId());
+		existingProduct.get().setCategory(product.getCategory());
+		existingProduct.get().setDescription(product.getDescription());
+		existingProduct.get().setImgURL(product.getImgURL());
+		existingProduct.get().setName(product.getName());
+		existingProduct.get().setOrders(product.getOrders());
+		existingProduct.get().setPrice(product.getPrice());
+		existingProduct.get().setQuantity(product.getQuantity());
+		productRepository.save(existingProduct.get());
+		return "Updated Successfully";
 	}
 	
 }

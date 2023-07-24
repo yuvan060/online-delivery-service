@@ -10,12 +10,13 @@ import Cart from "./Pages/Cart/Cart";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import LogOut from "./Pages/LogOut/LogOut";
-import DashBoard from "./Pages/DashBoard/DashBoard";
 import ProductByCategory from "./Pages/ProductByCategory/ProductByCategory";
 import Orders from "./Pages/Orders/Orders";
 import Account from "./Pages/Customer/Account";
 import AddProduct from "./Pages/Shop/AddProducts";
 import CompleteProfile from "./Pages/CompleteYourProfile/CompleteYourProfile";
+import ShopDashBoard from "./Pages/Shop/ShopDashboard";
+import EditProduct from "./Pages/Shop/EditProduct";
 
 function App() {
   const user = useSelector(selectUser);
@@ -42,13 +43,17 @@ function App() {
           <Route path="/offer" element={<Offer />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:category" element={<ProductByCategory />} />
-          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/dashboard/shop-owner" element={<ShopDashBoard />} />
           <Route path="/dashboard/orders" element={<Orders />} />
           <Route path="/dashboard/account" element={<Account />} />
           <Route path="/dashboard/add-products" element={<AddProduct />} />
           <Route
             path="/dashboard/complete-profile"
             element={<CompleteProfile />}
+          />
+          <Route
+            path="//dashboard/shop-owner/edit-product"
+            element={<EditProduct />}
           />
           <Route path="/logout" element={<LogOut />} />
           <Route path="*" element={<Error />} />

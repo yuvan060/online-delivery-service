@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.deliveryApplication.zipzap.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-	Optional<Product> findByCategory(String caterogy);
+	List<Product> findByCategory(String caterogy);
 	List<Product> findByShopId(Long shopId);
 }
 
