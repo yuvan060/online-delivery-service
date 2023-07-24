@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.flex-center-full-hw {
+  background: url("./assets/flat-bg.jpg") no-repeat center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+}
+.flex-center-full {
+  display: flex;
+  justify-content: center;
+  width: 5 0%;
+  /* align-items: center; */
+}
+form {
+  /* display: flex; */
+  padding: 20px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  border-radius: 15px;
+  min-width: 300px;
+}
+
+.field-container {
+  padding: 10px 0;
+}
+
+form h1 {
+  font-weight: normal;
+  font-size: 20px;
+  text-align: center;
+}
+
+form .button-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bg-orange {
+  /* color: #f3aa60 !important; */
+  background-color: #ef6262 !important;
+}
+
+.color-orange {
+  color: #ef6262 !important;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: black;
+}
+
+.cart-icon {
+  height: 25px;
+  margin: 10px;
+}
+
+.flex-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flex-container {
+  margin: 1%;
+  border: 1px solid rgb(224, 210, 210);
+  cursor: pointer;
+}
+
+.hr-line {
+  margin: 20px;
+  height: 2px;
+  background-color: rgb(224, 210, 210);
+}
+
+.dummy {
+  height: 80px;
+}
+.footer {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-container {
+  width: 80%;
+  border: 1px solid rgb(224, 210, 210);
+  padding: 2%;
+  margin: 1%;
+}
+.text {
+  padding: 0.5%;
+  margin: 0.7%;
+  font-size: 12px;
+}
+.list-ele {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3%;
+  width: 80%;
+  padding: 1%;
+}
+
+.css-dihucs-MuiContainer-root {
+  margin-top: 1% !important;
+}
+
+.logo {
+  height: 40px;
+  margin: 0.1%;
+}
+
+.hover-pointer {
+  cursor: pointer;
+}
