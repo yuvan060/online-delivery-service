@@ -31,6 +31,7 @@ public class Product {
     private String category;
     private String imgURL;
     private Long shopId;
+    private String todayDeal;
     
     @ManyToOne
     @JoinColumn(name = "shop_owner_id")

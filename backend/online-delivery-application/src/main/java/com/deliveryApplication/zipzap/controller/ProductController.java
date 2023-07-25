@@ -34,6 +34,11 @@ public class ProductController {
 		return productService.getProductsByCategory(category);
 	}
 	
+	@GetMapping("/today-deal")
+	public List<Product> getProductByTodayDeal(){
+		return productService.getProductsOnTodaysDeal();
+	}
+	
 	@PutMapping("update-product")
 	public String updateProduct(@RequestBody Product product) {
 		return productService.updateProduct(product);

@@ -1,5 +1,6 @@
 package com.deliveryApplication.zipzap.service;
 
+import com.deliveryApplication.zipzap.entity.Address;
 import com.deliveryApplication.zipzap.entity.Product;
 import com.deliveryApplication.zipzap.entity.ShopOwner;
 import com.deliveryApplication.zipzap.repository.ProductRepository;
@@ -31,6 +32,12 @@ public class ShopOwnerService {
     	productRepository.save(product);
     	owner.getProducts().add(product);
     	return ResponseEntity.ok("Product created successfully");
+    }
+    
+    public ShopOwner addAddress(String email,Address address) {
+    	ShopOwner shopOwner = shopOwnerRepository.findByUserEmail(email);
+    	shopOwner.setAddress(address);
+    	return shopOwner;
     }
     
     public List<Product> getProductsByShop(String email) {

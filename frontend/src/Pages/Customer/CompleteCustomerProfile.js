@@ -7,6 +7,7 @@ function CompleteProfile() {
     doorNo: "",
     street: "",
     locality: "",
+    contactNo: "",
   });
 
   function handleSubmit(e) {
@@ -74,6 +75,23 @@ function CompleteProfile() {
             ></TextField>
           </div>
           <div className="field-container">
+            <TextField
+              required
+              value={userDetails.contactNo}
+              onChange={(e) => {
+                setUserDetails({
+                  ...userDetails,
+                  contactNo: e.target.value,
+                });
+              }}
+              type="text"
+              id="text"
+              label="Contact No"
+              variant="outlined"
+              fullWidth
+            ></TextField>
+          </div>
+          <div className="field-container">
             <Button
               variant="contained"
               type="submit"
@@ -84,7 +102,7 @@ function CompleteProfile() {
             </Button>
           </div>
         </form>
-      </div>
+      </div>{" "}
     </>
   );
 }

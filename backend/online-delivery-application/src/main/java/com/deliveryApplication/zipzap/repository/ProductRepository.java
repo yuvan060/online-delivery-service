@@ -10,6 +10,7 @@ import com.deliveryApplication.zipzap.entity.Product;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	List<Product> findByCategory(String caterogy);
 	List<Product> findByShopId(Long shopId);
+	List<Product> findByTodayDeal(String isTodayDeal);
 }
 
 

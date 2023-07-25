@@ -24,6 +24,7 @@ function ShopAuth() {
       const data = {
         email: shopOwnerLogin.email,
         password: shopOwnerLogin.password,
+        role: "shop",
       };
       console.log(data);
       const res = await axios.post(
@@ -31,15 +32,19 @@ function ShopAuth() {
         data
       );
       console.log(res);
-      dispatch(
-        login({
-          email: shopOwnerLogin.email,
-          password: shopOwnerLogin.password,
-          role: "shop",
-          loggedIn: true,
-        })
-      );
-      navigate("/");
+      if (res.data.token === "Invalid Email/Password") {
+        notify("Invalid Email/Password");
+      } else {
+        dispatch(
+          login({
+            email: shopOwnerLogin.email,
+            password: shopOwnerLogin.password,
+            role: "shop",
+            loggedIn: true,
+          })
+        );
+        navigate("/");
+      }
     } catch (err) {
       console.log(err);
       notify("Invalid Email/Password");

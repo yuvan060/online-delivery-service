@@ -24,7 +24,7 @@ import snack3 from "../../assets/snack3.webp";
 import snack4 from "../../assets/snack4.webp";
 import Footer from "../../Components/Footer";
 import Section from "../../Components/Section";
-import SearchBar from "../../Components/SearchBar";
+// import SearchBar from "../../Components/SearchBar";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
 import { useEffect } from "react";
@@ -77,7 +77,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <DemoCarousel />
       <div className="dummy"></div>
       <Items item={fruits} title="Fruits & Vegetables" />

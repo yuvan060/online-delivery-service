@@ -54,6 +54,7 @@ function AddProduct() {
     quantity: "",
     price: "",
     category: "",
+    todayDeal: "",
   });
   return (
     <>
@@ -144,6 +145,22 @@ function AddProduct() {
                   setItems({
                     ...items,
                     quantity: e.target.value,
+                  });
+                }}
+                type="number"
+                required
+                variant="outlined"
+                label="Quantity"
+                fullWidth
+              />
+            </div>
+            <div className="field-container">
+              <TextField
+                value={items.todayDeal}
+                onChange={(e) => {
+                  setItems({
+                    ...items,
+                    todayDeal: e.target.value,
                   });
                 }}
                 type="number"

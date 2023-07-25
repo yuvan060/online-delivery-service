@@ -6,13 +6,14 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function ProductByCategory() {
+function DisplayAllProducts() {
   const [items, setItems] = useState();
+  const notify = (message) => toast.error(message);
   useEffect(() => {
     const fetch = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/products/" + category
+          "http://localhost:8080/api/products/today-deal"
         );
         setItems(res.data);
       } catch (e) {
@@ -21,23 +22,13 @@ function ProductByCategory() {
       }
     };
     fetch();
-  }, [items]);
-  const notify = (message) => toast.error(message);
-  const category =
-    window.location.href.split("/")[window.location.href.split("/").length - 1];
+  }, []);
   return (
     <>
       <Navbar />
       <center>
         <Typography variant="h4" gutterBottom className="heading">
-          {category
-            .split("-")
-            .map(
-              (word) =>
-                word.split("")[0].toUpperCase() +
-                word.slice(1, word.length) +
-                " "
-            )}
+          Today's Offer
         </Typography>
       </center>
       {items && <ProductDisplayPage items={items} />}
@@ -46,4 +37,4 @@ function ProductByCategory() {
   );
 }
 
-export default ProductByCategory;
+export default DisplayAllProducts;

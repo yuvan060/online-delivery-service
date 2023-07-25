@@ -28,6 +28,10 @@ public class ProductService {
 		return productRepository.findByCategory(category);
 	}
 	
+	public List<Product> getProductsOnTodaysDeal(){
+		return productRepository.findByTodayDeal("yes");
+	}
+	
 	public List<Product> getProductsByShopOwner(String email){
 		return shopOwnerRepository.findByUserEmail(email).getProducts();
 	}
@@ -46,6 +50,7 @@ public class ProductService {
 		existingProduct.get().setOrders(product.getOrders());
 		existingProduct.get().setPrice(product.getPrice());
 		existingProduct.get().setQuantity(product.getQuantity());
+		existingProduct.get().setTodayDeal(product.getTodayDeal());
 		productRepository.save(existingProduct.get());
 		return "Updated Successfully";
 	}

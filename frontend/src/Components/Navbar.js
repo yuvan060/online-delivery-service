@@ -19,7 +19,7 @@ import logo from "../assets/logo.gif";
 function Navbar() {
   var pages = [
     { name: "Home", link: "/" },
-    { name: "Today's Deal", link: "/offer" },
+    { name: "Today's Deal", link: "/today-deal" },
   ];
   const user = useSelector(selectUser);
   var settings =
@@ -27,11 +27,11 @@ function Navbar() {
       ? [{ name: "Login/Register", link: "/customer-auth" }]
       : [
           { name: "Your Account", link: "/dashboard/account" },
-          { name: "Your Orders", link: "/dashboard/orders" },
           {
             name: "Complete Your Profile",
-            link: "/dashboard/complete-profile",
+            link: "/dashboard/customer/complete-profile",
           },
+          { name: "Your Orders", link: "/dashboard/orders" },
           { name: "LogOut", link: "/logout" },
         ];
   if (user !== null) {
@@ -41,9 +41,27 @@ function Navbar() {
         { name: "Add Products", link: "/dashboard/add-products" },
         [{ name: "Orders", link: "/dashboard/orders" }],
       ];
+      settings = [
+        { name: "Your Account", link: "/dashboard/account" },
+        {
+          name: "Complete Your Profile",
+          link: "/dashboard/shop-owner/complete-profile",
+        },
+        { name: "Your Orders", link: "/dashboard/orders" },
+        { name: "LogOut", link: "/logout" },
+      ];
     }
     if (user.role === "deliveryPartner") {
       pages = null;
+      settings = [
+        { name: "Your Account", link: "/dashboard/account" },
+        {
+          name: "Complete Your Profile",
+          link: "/dashboard/delivery-partner/complete-profile",
+        },
+        { name: "Your Orders", link: "/dashboard/orders" },
+        { name: "LogOut", link: "/logout" },
+      ];
     }
   }
   const navigate = useNavigate();

@@ -31,16 +31,20 @@ function DeliveryPartnerAuth() {
         "http://localhost:8080/api/v1/auth/authenticate",
         data
       );
-      console.log(res);
-      dispatch(
-        login({
-          email: deliveryPartnerLogin.email,
-          password: deliveryPartnerLogin.password,
-          role: "deliveryPartner",
-          loggedIn: true,
-        })
-      );
-      navigate("/");
+      if (res.data.token === "Invalid Email/Password") {
+        notify("Invalid Email/Password");
+      } else {
+        console.log(res);
+        dispatch(
+          login({
+            email: deliveryPartnerLogin.email,
+            password: deliveryPartnerLogin.password,
+            role: "deliveryPartner",
+            loggedIn: true,
+          })
+        );
+        navigate("/");
+      }
     } catch (err) {
       console.log(err);
       notify("Invalid Email/Password");

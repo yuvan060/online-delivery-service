@@ -32,23 +32,28 @@ function CustomerAuth() {
       const data = {
         email: customerLogin.email,
         password: customerLogin.password,
+        role: "customer",
       };
       console.log(data);
       const res = await axios.post(
         "http://localhost:8080/api/v1/auth/authenticate",
         data
       );
-      console.log(res);
-      dispatch(
-        login({
-          email: customerLogin.email,
-          password: customerLogin.password,
-          token: res.data.token,
-          role: "customer",
-          loggedIn: true,
-        })
-      );
-      navigate("/");
+      if (res.data.token === "Invalid Email/Password") {
+        notify("Invalid Email/Password");
+      } else {
+        console.log(res);
+        dispatch(
+          login({
+            email: customerLogin.email,
+            password: customerLogin.password,
+            token: res.data.token,
+            role: "customer",
+            loggedIn: true,
+          })
+        );
+        navigate("/");
+      }
     } catch (e) {
       notify("Invalid Email/Password");
     }

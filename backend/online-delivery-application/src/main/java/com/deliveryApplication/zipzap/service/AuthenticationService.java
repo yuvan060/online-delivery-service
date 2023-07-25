@@ -82,6 +82,11 @@ public class AuthenticationService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+        if(!user.getRole().equals(request.getRole())) {
+        	return AuthenticationResponse.builder()
+                    .token("Invalid Email/Password")
+                    .build();
+        }
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)

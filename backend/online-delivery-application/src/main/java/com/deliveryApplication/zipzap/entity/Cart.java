@@ -17,7 +17,9 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String customerEmail;
+    private List<Long> productId;
+    private int quantity;
     @OneToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -27,13 +29,28 @@ public class Cart {
 
     // Constructors, getters, and setters
 
-    public void addCartItem(Product product, int quantity) {
-        CartItem cartItem = new CartItem(this, product, quantity);
-        cartItems.add(cartItem);
-    }
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
 
-    public void removeCartItem(CartItem cartItem) {
-        cartItems.remove(cartItem);
-    }
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public List<Long> getProductId() {
+		return productId;
+	}
+
+	public void setProductId(List<Long> productId) {
+		this.productId = productId;
+	}
 }
 

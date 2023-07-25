@@ -154,6 +154,22 @@ function EditProduct() {
                 fullWidth
               />
             </div>
+            <div className="field-container">
+              <TextField
+                value={items.todayDeal}
+                onChange={(e) => {
+                  setItems({
+                    ...items,
+                    todayDeal: e.target.value,
+                  });
+                }}
+                type="number"
+                required
+                variant="outlined"
+                label="Quantity"
+                fullWidth
+              />
+            </div>
           </div>
           <div className="field-container">
             <Button

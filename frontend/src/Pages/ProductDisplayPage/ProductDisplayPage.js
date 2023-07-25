@@ -8,23 +8,44 @@ import {
   CardContent,
   CardActions,
   Button,
+  IconButton,
   TextField,
 } from "@mui/material";
-import Navbar from "../../Components/Navbar";
-import { Delete as DeleteIcon } from "@mui/icons-material";
-import shopItem from "../../assets/shop-item.avif";
+import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
 
-function Cart() {
-  const [products, setProducts] = useState([]);
+const ProductDisplayPage = (props) => {
+  const [cart, setCart] = useState([]);
+  // localStorage.clear();
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setProducts(savedCart);
-  }, []);
+    setCart(savedCart);
+  }, [cart]);
 
-  const handleRemoveFromCart = (productId) => {
-    setProducts((prevCart) => prevCart.filter((item) => item.id !== productId));
-    const p = products.filter((item) => item.id !== productId);
-    localStorage.setItem("cart", JSON.stringify(p));
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const [products, setProducts] = useState(
+    props.items.map((item) => ({
+      ...item,
+      currentQuantity: 1,
+    }))
+  );
+
+  const handleAddToCart = (product) => {
+    const existingItem = cart.find((item) => item.id === product.id);
+    if (existingItem) {
+      setCart((prevCart) =>
+        prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, currentQuantity: item.currentQuantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCart((prevCart) => [...prevCart, { ...product }]);
+    }
+    console.log(cart);
   };
 
   const handleQuantityChange = (event, productId) => {
@@ -41,14 +62,35 @@ function Cart() {
     }
   };
 
+  const handleIncreaseQuantity = (productId) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === productId
+          ? {
+              ...product,
+              currentQuantity: Math.min(
+                product.currentQuantity + 1,
+                product.quantity
+              ),
+            }
+          : product
+      )
+    );
+    console.log(products);
+  };
+
+  const handleDecreaseQuantity = (productId) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === productId && product.currentQuantity > 1
+          ? { ...product, currentQuantity: product.currentQuantity - 1 }
+          : product
+      )
+    );
+  };
+
   return (
     <>
-      <Navbar />
-      <center>
-        <Typography variant="h4" gutterBottom className="heading">
-          Cart
-        </Typography>
-      </center>
       <Container>
         <Grid container spacing={2}>
           {products.map((product) => (
@@ -57,7 +99,7 @@ function Cart() {
                 <CardMedia
                   component="img"
                   height="200"
-                  image={shopItem}
+                  image={product.imgURL}
                   alt={product.name}
                 />
                 <CardContent>
@@ -74,6 +116,12 @@ function Cart() {
                       marginBottom: 8,
                     }}
                   >
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleDecreaseQuantity(product.id)}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
                     <TextField
                       type="text"
                       variant="outlined"
@@ -83,16 +131,21 @@ function Cart() {
                       inputProps={{ min: 1, step: 1, max: product.quantity }}
                       style={{ width: 60, margin: "0", padding: "6px" }}
                     />
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleIncreaseQuantity(product.id)}
+                    >
+                      <AddIcon />
+                    </IconButton>
                   </div>
                 </CardContent>
                 <CardActions>
                   <Button
                     size="small"
-                    color="secondary"
-                    onClick={() => handleRemoveFromCart(product.id)}
-                    startIcon={<DeleteIcon />}
+                    color="primary"
+                    onClick={() => handleAddToCart(product)}
                   >
-                    Remove
+                    Add to Cart
                   </Button>
                 </CardActions>
               </Card>
@@ -102,6 +155,6 @@ function Cart() {
       </Container>
     </>
   );
-}
+};
 
-export default Cart;
+export default ProductDisplayPage;
