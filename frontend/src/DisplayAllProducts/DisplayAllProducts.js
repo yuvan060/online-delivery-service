@@ -26,13 +26,15 @@ function DisplayAllProducts() {
   return (
     <>
       <Navbar />
-      <center>
-        <Typography variant="h4" gutterBottom className="heading">
-          Today's Offer
-        </Typography>
-      </center>
-      {items && <ProductDisplayPage items={items} />}
-      <ToastContainer />
+      <div className="flex-center-full-hw">
+        <center>
+          <Typography variant="h4" gutterBottom className="heading">
+            Today's Offer
+          </Typography>
+        </center>
+        {items && <ProductDisplayPage items={items} />}
+        <ToastContainer />
+      </div>
     </>
   );
 }

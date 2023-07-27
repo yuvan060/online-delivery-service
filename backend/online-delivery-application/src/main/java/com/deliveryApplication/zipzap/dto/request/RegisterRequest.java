@@ -34,4 +34,11 @@ public class RegisterRequest {
 		this.password = password;
 	}
 	
+	 public String getShopName() {
+	        return shopName;
+	    }
+
+	    public void setShopName(String shopName) {
+	        this.shopName = shopName;
+	    }
 }

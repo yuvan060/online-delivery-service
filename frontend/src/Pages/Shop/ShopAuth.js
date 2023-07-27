@@ -62,7 +62,7 @@ function ShopAuth() {
 
   async function handleRegister(e) {
     e.preventDefault();
-
+    console.log(shopOwner);
     try {
       if (shopOwner.password !== shopOwner.confirmPassword) {
         notify("Passwords won't match");

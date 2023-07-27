@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
+import Footer from "../../Components/Footer";
 
 const ProductDisplayPage = (props) => {
   const [cart, setCart] = useState([]);
@@ -91,11 +92,11 @@ const ProductDisplayPage = (props) => {
 
   return (
     <>
-      <Container>
+      <Container className="flex-center-full">
         <Grid container spacing={2}>
           {products.map((product) => (
             <Grid item xs={12} sm={6} md={4} key={product.id}>
-              <Card>
+              <Card className="grid-container">
                 <CardMedia
                   component="img"
                   height="200"
@@ -153,6 +154,9 @@ const ProductDisplayPage = (props) => {
           ))}
         </Grid>
       </Container>
+      <div className="footer-bottom">
+        <Footer />
+      </div>
     </>
   );
 };

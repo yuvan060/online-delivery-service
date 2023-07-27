@@ -35,6 +35,7 @@ function EditProduct() {
   }
 
   const [items, setItems] = useState(location.state?.item);
+  console.log(items);
   const category = [
     { content: "Fruits & Vegetables" },
     { content: "Snacks & Biscuits" },
@@ -66,7 +67,7 @@ function EditProduct() {
           }}
         >
           <div>
-            <h1>Add Product</h1>
+            <h1>Edit Product</h1>
             <div className="field-container">
               <TextField
                 value={items.name}
@@ -83,8 +84,19 @@ function EditProduct() {
               />
             </div>
             <div className="field-container">
-              <label>Product Image*</label>
-              <TextField type="file" fullWidth variant="outlined" />
+              <TextField
+                type="text"
+                value={items.imgURL}
+                onChange={(e) => {
+                  setItems({
+                    ...items,
+                    imgURL: e.target.value,
+                  });
+                }}
+                fullWidth
+                variant="outlined"
+                label="Product Image"
+              />
             </div>
             <div className="field-container">
               <FormControl fullWidth required>
@@ -163,10 +175,10 @@ function EditProduct() {
                     todayDeal: e.target.value,
                   });
                 }}
-                type="number"
+                type="text"
                 required
                 variant="outlined"
-                label="Quantity"
+                label="Today's Deal"
                 fullWidth
               />
             </div>
@@ -178,7 +190,7 @@ function EditProduct() {
               variant="contained"
               className="bg-orange"
             >
-              Add Product
+              Update Product
             </Button>
           </div>
         </form>

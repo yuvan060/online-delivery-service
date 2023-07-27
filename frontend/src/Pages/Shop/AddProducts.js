@@ -11,6 +11,8 @@ import {
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddProduct() {
   const user = useSelector(selectUser);
@@ -35,6 +37,8 @@ function AddProduct() {
     { content: "Beauty & Makeup" },
     { content: "Kitchen & Home" },
   ];
+  const notify = (message) => toast.success(message);
+  const notifyError = (message) => toast.error(message);
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -43,13 +47,14 @@ function AddProduct() {
         items
       );
       console.log(res);
+      notify(res.data);
     } catch (e) {
-      console.log(e);
+      notifyError(e.CODE);
     }
   }
   const [items, setItems] = useState({
     name: "",
-    imageURL: "",
+    imgURL: "",
     description: "",
     quantity: "",
     price: "",
@@ -83,8 +88,19 @@ function AddProduct() {
               />
             </div>
             <div className="field-container">
-              <label>Product Image*</label>
-              <TextField type="file" fullWidth variant="outlined" />
+              <TextField
+                type="text"
+                value={items.imgURL}
+                onChange={(e) => {
+                  setItems({
+                    ...items,
+                    imgURL: e.target.value,
+                  });
+                }}
+                label="Product Image"
+                fullWidth
+                variant="outlined"
+              />
             </div>
             <div className="field-container">
               <FormControl fullWidth required>
@@ -163,10 +179,10 @@ function AddProduct() {
                     todayDeal: e.target.value,
                   });
                 }}
-                type="number"
+                type="text"
                 required
                 variant="outlined"
-                label="Quantity"
+                label="Today's Deal"
                 fullWidth
               />
             </div>
@@ -182,6 +198,7 @@ function AddProduct() {
             </Button>
           </div>
         </form>
+        <ToastContainer />
       </div>
     </>
   );

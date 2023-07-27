@@ -19,6 +19,9 @@ import EditProduct from "./Pages/Shop/EditProduct";
 import CompleteShopProfile from "./Pages/Shop/CompleteShopProfile";
 import CompleteDeliveryPartnerProfile from "./Pages/DeliveryPartner/CompleteDeliveryPartnerProfile";
 import TodayDeals from "./Pages/Customer/TodayDeals";
+import CustomerDashBoard from "./Pages/Customer/CustomerDashboard";
+import ShopOwnerDashBoardAccount from "./Pages/Shop/ShopOwnerAccount";
+import Contact from "./Pages/FeedBack";
 
 function App() {
   const user = useSelector(selectUser);
@@ -33,6 +36,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPass />} />
           <Route path="/product/:category" element={<ProductByCategory />} />
           <Route path="/today-deal" element={<TodayDeals />} />
+          <Route path="/feedback" element={<Contact />} />
           <Route path="*" element={<Error />} />
         </Routes>
       ) : (
@@ -44,6 +48,14 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPass />} />
           <Route path="/today-deal" element={<TodayDeals />} />
           <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/dashboard/customer/account"
+            element={<CustomerDashBoard />}
+          />
+          <Route
+            path="/dashboard/shop-owner/account"
+            element={<ShopOwnerDashBoardAccount />}
+          />
           <Route path="/product/:category" element={<ProductByCategory />} />
           <Route path="/dashboard/shop-owner" element={<ShopDashBoard />} />
           <Route path="/dashboard/orders" element={<Orders />} />
@@ -65,6 +77,7 @@ function App() {
             path="/dashboard/delivery-partner/complete-profile"
             element={<CompleteDeliveryPartnerProfile />}
           />
+          <Route path="/feedback" element={<Contact />} />
           <Route path="/logout" element={<LogOut />} />
           <Route path="*" element={<Error />} />
         </Routes>

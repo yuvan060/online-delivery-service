@@ -26,7 +26,7 @@ function Navbar() {
     user === null
       ? [{ name: "Login/Register", link: "/customer-auth" }]
       : [
-          { name: "Your Account", link: "/dashboard/account" },
+          { name: "Your Account", link: "/dashboard/customer/account" },
           {
             name: "Complete Your Profile",
             link: "/dashboard/customer/complete-profile",
@@ -42,7 +42,7 @@ function Navbar() {
         [{ name: "Orders", link: "/dashboard/orders" }],
       ];
       settings = [
-        { name: "Your Account", link: "/dashboard/account" },
+        { name: "Your Account", link: "/dashboard/shop-owner/account" },
         {
           name: "Complete Your Profile",
           link: "/dashboard/shop-owner/complete-profile",

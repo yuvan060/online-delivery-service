@@ -1,5 +1,7 @@
 package com.deliveryApplication.zipzap.controller;
 
+import com.deliveryApplication.zipzap.entity.Address;
+import com.deliveryApplication.zipzap.entity.Customer;
 import com.deliveryApplication.zipzap.entity.Product;
 import com.deliveryApplication.zipzap.entity.ShopOwner;
 import com.deliveryApplication.zipzap.service.ShopOwnerService;
@@ -38,5 +40,11 @@ public class ShopOwnerController {
     @GetMapping("/get-product/{email}")
     public List<Product> getProducts(@PathVariable String email) {
     	return shopOwnerService.getProductsByShop(email);
+    }
+    
+    @PostMapping("/add-address/{email}")
+    public ShopOwner addAddress(@PathVariable String email,@RequestBody Address address) {
+    	System.out.print("*");
+    	return shopOwnerService.addDeliveryAddress(email, address);
     }
 }

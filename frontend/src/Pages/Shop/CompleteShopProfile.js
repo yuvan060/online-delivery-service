@@ -1,18 +1,36 @@
 import { Button, TextField } from "@mui/material";
 import Navbar from "../../Components/Navbar";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CompleteShopProfile() {
+  const notify = (m) => toast.error(m);
+  const notifySuccess = (m) => toast.success(m);
+  const user = useSelector(selectUser);
   const [userDetails, setUserDetails] = useState({
+    shopName: "",
     doorNo: "",
     street: "",
     locality: "",
     contactNo: "",
   });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(userDetails);
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/shop-owners/add-address/" + user.email,
+        userDetails
+      );
+      console.log(res);
+      notifySuccess("Profile updated successfully");
+    } catch (e) {
+      notify(e.CODE);
+    }
   }
 
   return (
@@ -22,6 +40,23 @@ function CompleteShopProfile() {
         <form onSubmit={handleSubmit}>
           <div className="field-container">
             <h1>Complete Your Profile</h1>
+          </div>
+          <div className="field-container">
+            <TextField
+              required
+              value={userDetails.CompleteShopProfile}
+              onChange={(e) => {
+                setUserDetails({
+                  ...userDetails,
+                  shopName: e.target.value,
+                });
+              }}
+              type="text"
+              id="text"
+              label="Shop Name"
+              variant="outlined"
+              fullWidth
+            ></TextField>
           </div>
           <div className="field-container">
             <TextField
@@ -103,6 +138,7 @@ function CompleteShopProfile() {
           </div>
         </form>
       </div>{" "}
+      <ToastContainer />
     </>
   );
 }

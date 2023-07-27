@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const CustomerDashBoard = () => {
+const ShopOwnerDashBoardAccount = () => {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
   const [userDetails, setUserDetails] = useState({});
@@ -18,7 +18,7 @@ const CustomerDashBoard = () => {
     const fetch = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/customers/" + user.email
+          "http://localhost:8080/api/shop-owners/" + user.email
         );
         setUserDetails(res.data);
         console.log(res.data);
@@ -82,4 +82,4 @@ const CustomerDashBoard = () => {
   );
 };
 
-export default CustomerDashBoard;
+export default ShopOwnerDashBoardAccount;

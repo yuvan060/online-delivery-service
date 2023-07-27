@@ -66,6 +66,7 @@ public class AuthenticationService {
         	deliveryPartner.setUser(savedUser);
         	deliveryPartnerRepository.save(deliveryPartner);
         }else if(request.getRole().equals("shop")){
+        	System.out.print(request);
         	ShopOwner shopOwner = new ShopOwner();
         	shopOwner.setName(request.getName());
         	shopOwner.setShopName(request.getShopName());
