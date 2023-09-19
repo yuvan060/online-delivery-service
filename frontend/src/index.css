@@ -16,20 +16,6 @@
   padding: 20px;
 }
 
-.flex-center-full {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 90vh;
-  padding: 20px;
-}
-.flex-center-full {
-  display: flex;
-  justify-content: center;
-  width: 5 0%;
-  /* align-items: center; */
-}
 form {
   /* display: flex; */
   padding: 20px;

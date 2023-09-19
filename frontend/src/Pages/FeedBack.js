@@ -11,15 +11,15 @@ const Contact = () => {
     console.log(feed);
     e.preventDefault();
     axios
-      .post("http://localhost:8080/api/v1/users/addUserFeedback", {
+      .post("http://localhost:8082/api/v1/feed/addFeedback", {
         email: mail,
         feedback: feed,
       })
       .then((res) => {
-        console.log("Error occured while submitting");
+        alert("Feedback added successfully");
       })
       .catch((e) => {
-        alert("Feedback added");
+        alert("Error occured while submitting");
         console.log(e);
       });
   };
